@@ -1,4 +1,4 @@
-﻿## Offline app setup full process step by step
+## Offline app setup full process step by step
 
 ### *First need to install a fresh ubuntu server install on a server pc*.
 
@@ -125,3 +125,11 @@
 
 - Run this command to open mysql server tunel and also add on crontab -e
 >`ssh -f -N -R 3360:localhost:3306 serveo.net`
+
+- Login to your mysql server and add an user 
+>`mysql -u root -p `
+>`CREATE USER 'replica'@'%' IDENTIFIED BY 'Replica@123';`
+>`GRANT ALL ON *.* TO 'replica'@'%';`
+
+- Try to login remotly through thi command
+>`mysql -u replica -pReplica@123 -h serveo.net -P 3360`
