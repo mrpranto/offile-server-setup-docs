@@ -150,7 +150,7 @@
 >`binlog_do_db            = [database_name]`
 
 - Restart mysql server
->`sudo systemctl restart mysql`
+>`sudo service mysql restart`
 
 - Login on mysql master server
 > `mysql -u [root] -p[password]`
