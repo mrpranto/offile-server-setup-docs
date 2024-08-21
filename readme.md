@@ -131,5 +131,46 @@
 >`CREATE USER 'replica'@'%' IDENTIFIED BY 'Replica@123';`
 >`GRANT ALL ON *.* TO 'replica'@'%';`
 
-- Try to login remotly through thi command
+- Try to login on mysql server remotly through this command
 >`mysql -u replica -pReplica@123 -h serveo.net -P 3360`
+
+- Try to login on server remotly through this command
+> `ssh -p 3333 familymart@serveo.net`
+
+#### Setp 8: Setup mysql master slave replication on server database
+- Set master database configration
+>`sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf`
+>`# bind-address          = 127.0.0.1`
+
+- Uncomment this line or add this 
+> `server-id              = 1`
+> `log_bin                 = /var/log/mysql/mysql-bin.log`
+
+- Add database name on this
+>`binlog_do_db            = [database_name]`
+
+- Restart mysql server
+>`sudo systemctl restart mysql`
+
+- Login on mysql master server
+> `mysql -u [root] -p[password]`
+> `ALTER USER 'replica'@'%' IDENTIFIED WITH mysql_native_password BY 'Replica@123';`
+> `FLUSH PRIVILEGES;`
+> `SHOW MASTER STATUS;`
+> `Copy the table`
+
+- Login to mysql slave server
+> `mysql -u [root] -p[password]`
+> `Upload master database on slave server`
+> `STOP SLAVE;`
+
+    CHANGE MASTER TO
+    MASTER_HOST='serveo.net',
+    MASTER_PORT=3360,
+    MASTER_USER='[MASTER_REPLICA_USER]',
+    MASTER_PASSWORD='[MASTER_REPLICA_USER]',
+    MASTER_LOG_FILE='[File - mysql-bin.000001]',
+    MASTER_LOG_POS=[File POSITION];
+
+>`START SLAVE;`
+>`SHOW SLAVE STATUS\G`
