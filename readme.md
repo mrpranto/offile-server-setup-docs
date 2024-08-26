@@ -136,6 +136,8 @@
 
 - Try to login on server remotly through this command
 > `ssh -p 3333 familymart@serveo.net`
+> `@reboot ssh -f -N -R 3333:localhost:22 serveo.net`
+> `@reboot ssh -f -N -R 3360:localhost:3306 serveo.net`
 
 #### Setp 8: Setup mysql master slave replication on server database
 - Set master database configration
