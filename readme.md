@@ -184,3 +184,9 @@
 > `@reboot ssh -f -N -R 3360:localhost:3306 serveo.net`
 > `0 */4 * * * /usr/bin/ssh -f -N -R 3333:localhost:22 serveo.net -o ServerAliveInterval=60 -o ServerAliveCountMax=3 >> /dev/null 2>&1`
 > `0 */4 * * * /usr/bin/ssh -f -N -R 3360:localhost:3306 serveo.net -o ServerAliveInterval=60 -o ServerAliveCountMax=3 >> /dev/null 2>&1`
+#### Setp 9: Install redis 
+>`sudo apt install redis-server`
+>`sudo systemctl start redis-server`
+>`sudo systemctl enable redis-server`
+>`sudo systemctl status redis-server`
+>`redis-cli ping`
