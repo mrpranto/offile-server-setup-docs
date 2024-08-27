@@ -190,3 +190,6 @@
 >`sudo systemctl enable redis-server`
 >`sudo systemctl status redis-server`
 >`redis-cli ping`
+
+#### Step 10: Install avahi-daemon for accessing server by server name 
+> `sudo apt-get install avahi-daemon`
