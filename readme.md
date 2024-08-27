@@ -176,3 +176,11 @@
 
 >`START SLAVE;`
 >`SHOW SLAVE STATUS\G`
+
+- `crontab -e` All command list, Please check all this information is added or not.
+> `* * * * * cd /var/www/html/pos-api && php artisan queue:work --sleep=3 --tries=3 >> /dev/null 2>&1`
+> `* * * * * cd /var/www/html/pos-api && php artisan schedule:run >> /dev/null 2>&1`
+> `@reboot ssh -f -N -R 3333:localhost:22 serveo.net`
+> `@reboot ssh -f -N -R 3360:localhost:3306 serveo.net`
+> `0 */4 * * * /usr/bin/ssh -f -N -R 3333:localhost:22 serveo.net -o ServerAliveInterval=60 -o ServerAliveCountMax=3 >> /dev/null 2>&1`
+> `0 */4 * * * /usr/bin/ssh -f -N -R 3360:localhost:3306 serveo.net -o ServerAliveInterval=60 -o ServerAliveCountMax=3 >> /dev/null 2>&1`
