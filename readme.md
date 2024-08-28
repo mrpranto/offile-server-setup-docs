@@ -247,4 +247,6 @@
    
 14. **Now you can upload file to google drive:**
     * `rclone copy /var/www/html/backup/familymart.sql  mydrive:/ReformedTech/Familymart/$(date +'%Y-%m-%d') --update`
-
+      
+15. **Set on cron tab in every 6 hours: **
+    * `0 */6 * * * mysqldump -u [database_name] -p[pasword] [database_name] > /var/www/html/backup/[database_name] && rclone copy /var/www/html/backup/[database_name] mydrive:/ReformedTech/[client_name]/$(date +\%Y-\%m-\%d) --update`
