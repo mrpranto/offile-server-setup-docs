@@ -246,5 +246,5 @@
      *  Once everything is set up, type `q` to quit the `rclone` config.
    
 14. **Now you can upload file to google drive:**
-    * `rclone copy /local/file/url/example.txt mydrive:/path/in/drive --update`
+    * `rclone copy /var/www/html/backup/familymart.sql  mydrive:/ReformedTech/Familymart/$(date +'%Y-%m-%d') --update`
 
