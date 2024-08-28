@@ -227,7 +227,8 @@
     *   Choose `y` for auto-config. Since you're on a server without a browser, this may fail, and you'll be prompted to follow a manual process.
     *   If it fails, `rclone` will provide you with a URL. Copy this URL.
 8.  **Authorize `rclone`:**
-    
+
+    *   run this command in your local pc `ssh -L 53682:localhost:53682 username@your_server_ip`
     *   Paste the URL into a browser on a device with access to your Google account. Follow the authorization steps.
     *   After authorization, you'll receive a verification code. Copy this code.
 9.  **Enter Verification Code:**
@@ -243,3 +244,7 @@
 13.  **Exit:**
 
      *  Once everything is set up, type `q` to quit the `rclone` config.
+   
+14. **Now you can upload file to google drive:**
+    * `rclone copy /local/file/url/example.txt mydrive:/path/in/drive --update`
+
