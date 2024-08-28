@@ -174,6 +174,7 @@
     MASTER_LOG_FILE='[File - mysql-bin.000001]',
     MASTER_LOG_POS=[File POSITION];
 
+>`SET GLOBAL sql_slave_skip_counter = 1;`
 >`START SLAVE;`
 >`SHOW SLAVE STATUS\G`
 
