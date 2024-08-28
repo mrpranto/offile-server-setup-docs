@@ -234,11 +234,12 @@
     
     *   Return to your server, and paste the verification code into the terminal.
 10.  **Team Drive:**
+
+     * If you're using a personal Google Drive, choose `n` for the team drive option.
     
-    *   If you're using a personal Google Drive, choose `n` for the team drive option.
-11.  **Confirm Configuration:**
-    
-    *   `rclone` will display the details of your new remote. Type `y` to confirm and save the configuration.
-12.  **Exit:**
-    
-    *   Once everything is set up, type `q` to quit the `rclone` config.
+12.  **Confirm Configuration:**
+
+     *   `rclone` will display the details of your new remote. Type `y` to confirm and save the configuration.
+13.  **Exit:**
+
+     *  Once everything is set up, type `q` to quit the `rclone` config.
