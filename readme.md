@@ -1,3 +1,4 @@
+
 ## Offline app setup full process step by step
 
 ### *First need to install a fresh ubuntu server install on a server pc*.
@@ -183,8 +184,45 @@
 > `* * * * * cd /var/www/html/pos-api && php artisan schedule:run >> /dev/null 2>&1`
 > `@reboot ssh -f -N -R 3333:localhost:22 serveo.net`
 > `@reboot ssh -f -N -R 3360:localhost:3306 serveo.net`
-> `0 */4 * * * /usr/bin/ssh -f -N -R 3333:localhost:22 serveo.net -o ServerAliveInterval=60 -o ServerAliveCountMax=3 >> /dev/null 2>&1`
-> `0 */4 * * * /usr/bin/ssh -f -N -R 3360:localhost:3306 serveo.net -o ServerAliveInterval=60 -o ServerAliveCountMax=3 >> /dev/null 2>&1`
+
+- Use this process for run always ssh and mysql tunnel
+- For SSH
+> `sudo nano /etc/systemd/system/ssh-tunnel.service`
+
+       [Unit]
+       Description=SSH Tunnel to Serveo
+       After=network.target
+       
+       [Service]
+       ExecStart=/usr/bin/ssh -f -N -R 3333:localhost:22 serveo.net
+       Restart=always
+       User=familymart
+       
+       [Install]
+       WantedBy=multi-user.target
+
+>`sudo systemctl enable ssh-tunnel`
+>`sudo systemctl start ssh-tunnel`
+
+- For MYSQL
+> `sudo nano /etc/systemd/system/ssh-mysql-tunnel.service`
+
+        [Unit]
+       Description=SSH Tunnel to Serveo
+       After=network.target
+       
+       [Service]
+       ExecStart=/usr/bin/ssh -f -N -R 3360:localhost:3306 serveo.net
+       Restart=always
+       User=familymart
+       
+       [Install]
+       WantedBy=multi-user.target
+
+>`sudo systemctl enable ssh-mysql-tunnel`
+>`sudo systemctl start ssh-mysql-tunnel`
+
+
 #### Setp 9: Install redis 
 >`sudo apt install redis-server`
 >`sudo systemctl start redis-server`
@@ -250,3 +288,5 @@
       
 15. **Set on cron tab in every 6 hours: **
     * `0 */6 * * * mysqldump -u [database_name] -p[pasword] [database_name] > /var/www/html/backup/[database_name] && rclone copy /var/www/html/backup/[database_name] mydrive:/ReformedTech/[client_name]/$(date +\%Y-\%m-\%d) --update`
+
+
