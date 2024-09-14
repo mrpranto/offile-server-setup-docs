@@ -52,7 +52,7 @@
 - Install git:
 > `sudo apt install git-all`
 
-- Clone git project repository:
+- Clone git project api repository:
 >`git clone --project--url--`
 
 - Make a .env file on root path
