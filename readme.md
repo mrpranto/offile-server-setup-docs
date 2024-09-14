@@ -105,7 +105,7 @@
 #### Step 6: Install NextJs Project
 
 - Clone git project repository
-> `git colen --project-url--`
+> `git clone --depth 1 --project-url--`
 > `npm install`
 > `sudo nano .env`
 
