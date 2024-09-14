@@ -82,7 +82,7 @@
 
     ErrorLog ${APACHE_LOG_DIR}/error8000.log
     CustomLog ${APACHE_LOG_DIR}/access8000.log combined
-</VirtualHost>
+    </VirtualHost>
 
 - Open port 8000
 > `sudo nano /etc/apache2/ports.conf`
