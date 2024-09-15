@@ -119,28 +119,14 @@
 > `change document root path to your prject folder path`
 > `sudo systemctl restart apache2`
 
-#### Setp 7: Open server access on internet
-- Run this command to open server tunel and also add on crontab -e
->`ssh -f -N -R 3333:localhost:22 serveo.net`
->
-
-- Run this command to open mysql server tunel and also add on crontab -e
->`ssh -f -N -R 3360:localhost:3306 serveo.net`
 
 - Login to your mysql server and add an user 
 >`mysql -u root -p `
 >`CREATE USER 'replica'@'%' IDENTIFIED BY 'Replica@123';`
 >`GRANT ALL ON *.* TO 'replica'@'%';`
 
-- Try to login on mysql server remotly through this command
->`mysql -u replica -pReplica@123 -h serveo.net -P 3360`
 
-- Try to login on server remotly through this command
-> `ssh -p 3333 familymart@serveo.net`
-> `@reboot ssh -f -N -R 3333:localhost:22 serveo.net`
-> `@reboot ssh -f -N -R 3360:localhost:3306 serveo.net`
-
-#### Setp 8: Setup mysql master slave replication on server database
+#### Setp 7: Setup mysql master slave replication on server database
 - Set master database configration
 >`sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf`
 >`# bind-address          = 127.0.0.1`
@@ -182,57 +168,18 @@
 - `crontab -e` All command list, Please check all this information is added or not.
 > `* * * * * cd /var/www/html/pos-api && php artisan queue:work --sleep=3 --tries=3 >> /dev/null 2>&1`
 > `* * * * * cd /var/www/html/pos-api && php artisan schedule:run >> /dev/null 2>&1`
-> `@reboot ssh -f -N -R 3333:localhost:22 serveo.net`
-> `@reboot ssh -f -N -R 3360:localhost:3306 serveo.net`
-
-- Use this process for run always ssh and mysql tunnel
-- For SSH
-> `sudo nano /etc/systemd/system/ssh-tunnel.service`
-
-       [Unit]
-       Description=SSH Tunnel to Serveo
-       After=network.target
-       
-       [Service]
-       ExecStart=/usr/bin/ssh -f -N -R 3333:localhost:22 serveo.net
-       Restart=always
-       User=familymart
-       
-       [Install]
-       WantedBy=multi-user.target
-
->`sudo systemctl enable ssh-tunnel`
->`sudo systemctl start ssh-tunnel`
-
-- For MYSQL
-> `sudo nano /etc/systemd/system/ssh-mysql-tunnel.service`
-
-        [Unit]
-       Description=SSH Tunnel to Serveo
-       After=network.target
-       
-       [Service]
-       ExecStart=/usr/bin/ssh -f -N -R 3360:localhost:3306 serveo.net
-       Restart=always
-       User=familymart
-       
-       [Install]
-       WantedBy=multi-user.target
-
->`sudo systemctl enable ssh-mysql-tunnel`
->`sudo systemctl start ssh-mysql-tunnel`
 
 
-#### Setp 9: Install redis 
+#### Setp 8: Install redis 
 >`sudo apt install redis-server`
 >`sudo systemctl start redis-server`
 >`sudo systemctl enable redis-server`
 >`sudo systemctl status redis-server`
 >`redis-cli ping`
 
-#### Step 10: Install avahi-daemon for accessing server by server name 
+#### Step 9: Install avahi-daemon for accessing server by server name 
 > `sudo apt-get install avahi-daemon`
-#### Step 11: Install `rclone` for database manual backup
+#### Step 10: Install `rclone` for database manual backup
 > `sudo apt update`
 > `sudo apt install rclone`
 
