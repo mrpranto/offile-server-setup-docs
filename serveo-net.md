@@ -1,4 +1,4 @@
-#### Setp 7: Open server access on internet
+#### Setp 1: Open server access on internet
 - Run this command to open server tunel and also add on crontab -e
 > `ssh -f -N -R 3333:localhost:22 serveo.net`
 > `@reboot ssh -f -N -R 3333:localhost:22 serveo.net`
